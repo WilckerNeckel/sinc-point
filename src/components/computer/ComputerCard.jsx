@@ -3,21 +3,23 @@ import Draggable from 'react-draggable';
 import { Box, Typography } from '@mui/material';
 import computerImage from '../../assets/computer.png';
 
-function ComputerCard({ ip, time: initialTime }) {
-  // Inicializa o estado do horário com o valor da prop `initialTime`
+function ComputerCard({ ip, resetTime, time: initialTime = new Date() }) {
   const [time, setTime] = useState(new Date(initialTime));
 
   useEffect(() => {
-    // Configura o intervalo para atualizar o horário a cada segundo
     const interval = setInterval(() => {
       setTime((prevTime) => new Date(prevTime.getTime() + 1000));
     }, 1000);
 
-    // Limpa o intervalo ao desmontar o componente
     return () => clearInterval(interval);
   }, []);
 
-  // Formata o horário para exibir apenas HH:MM:SS
+  useEffect(() => {
+    if (resetTime) {
+      setTime(new Date(0)); // Reset para 00:00:00
+    }
+  }, [resetTime]);
+
   const formattedTime = time.toLocaleTimeString();
 
   return (
