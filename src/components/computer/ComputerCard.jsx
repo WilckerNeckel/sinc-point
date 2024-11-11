@@ -29,7 +29,7 @@ function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
   const formattedTime = time.toLocaleTimeString();
 
   return (
-    <Draggable>
+    // <Draggable>
       <Box
         sx={{
           display: 'flex',
@@ -90,7 +90,7 @@ function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
           </Box>
         )}
       </Box>
-    </Draggable>
+    // {/* </Draggable> */}
   );
 }
 
