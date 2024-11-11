@@ -3,11 +3,7 @@ import ComputerGrid from "./components/computer/ComputerGrid";
 import ServerClock from "./components/server/ServerClock";
 import { Drawer, Box, TextField, Button, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import {
-  DatePicker,
-  TimePicker,
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "./App.css";
@@ -43,7 +39,8 @@ function App() {
     if (newComputer.ip && newComputer.date && newComputer.time) {
       const dateTime = newComputer.date
         .hour(newComputer.time.hour())
-        .minute(newComputer.time.minute());
+        .minute(newComputer.time.minute())
+        .second(newComputer.time.second());
       setComputers([
         ...computers,
         {
@@ -80,112 +77,204 @@ function App() {
         </div>
 
         <Drawer
-          anchor="right"
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          PaperProps={{
-            sx: {
-              width: "250px",
-              padding: "16px",
-              backgroundColor: "#333",
-              color: "#ffffff",
-            },
-          }}
-        >
-          <Typography
-            variant="h6"
-            sx={{ marginBottom: "16px", color: "#81c784" }}
-          >
-            Adicionar Computador
-          </Typography>
-          <TextField
-            label="IP"
-            variant="outlined"
-            name="ip"
-            value={newComputer.ip}
-            onChange={handleInputChange}
-            fullWidth
-            sx={{
-              marginBottom: "16px",
-              backgroundColor: "#ffffff",
-              borderRadius: "4px",
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "#4caf50",
-                },
-                "&:hover fieldset": {
-                  borderColor: "#81c784",
-                },
-              },
-            }}
-          />
-          <DatePicker
-            label="Data"
-            value={newComputer.date}
-            onChange={(newDate) =>
-              setNewComputer((prev) => ({ ...prev, date: newDate }))
-            }
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                sx={{
-                  marginBottom: "16px",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "4px",
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "#4caf50",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "#81c784",
-                    },
-                  },
-                }}
-              />
-            )}
-          />
-          <TimePicker
-            label="Hora"
-            value={newComputer.time}
-            onChange={(newTime) =>
-              setNewComputer((prev) => ({ ...prev, time: newTime }))
-            }
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                sx={{
-                  marginBottom: "16px",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "4px",
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "#4caf50",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "#81c784",
-                    },
-                  },
-                }}
-              />
-            )}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleAddComputer}
-            fullWidth
-            sx={{
-              backgroundColor: "#4caf50",
-              "&:hover": {
-                backgroundColor: "#388e3c",
-              },
-            }}
-          >
-            Adicionar
-          </Button>
-        </Drawer>
+  anchor="right"
+  open={drawerOpen}
+  onClose={() => setDrawerOpen(false)}
+  PaperProps={{
+    sx: {
+      width: "250px",
+      padding: "16px",
+      backgroundColor: "#333",
+      color: "#ffffff",
+    },
+  }}
+>
+  <Typography
+    variant="h6"
+    sx={{ marginBottom: "16px", color: "#81c784" }}
+  >
+    Adicionar Computador
+  </Typography>
+  <TextField
+    label="IP"
+    variant="outlined"
+    name="ip"
+    value={newComputer.ip}
+    onChange={handleInputChange}
+    fullWidth
+    sx={{
+      marginBottom: "16px",
+      backgroundColor: "#ffffff",
+      borderRadius: "4px",
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: "#4caf50",
+        },
+        "&:hover fieldset": {
+          borderColor: "#81c784",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "#4caf50", // Sempre verde quando focado
+        },
+      },
+      "& label": {
+        color: "#000000", // Cor preta para o label
+      },
+      "& label.Mui-focused": {
+        color: "#000000", // Cor preta para o label quando focado
+      },
+    }}
+  />
+  <TextField
+    label="Data"
+    type="date"
+    value={newComputer.date.format("YYYY-MM-DD")}
+    onChange={(e) =>
+      setNewComputer((prev) => ({ ...prev, date: dayjs(e.target.value) }))
+    }
+    fullWidth
+    sx={{
+      marginBottom: "16px",
+      backgroundColor: "#ffffff",
+      borderRadius: "4px",
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: "#4caf50",
+        },
+        "&:hover fieldset": {
+          borderColor: "#81c784",
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: "#4caf50",
+        },
+      },
+      "& label": {
+        color: "#000000", // Cor preta para o label
+      },
+      "& label.Mui-focused": {
+        color: "#000000", // Cor preta para o label quando focado
+      },
+    }}
+  />
+
+  <Box sx={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '16px' }}>
+    <TextField
+      label="Hora"
+      type="number"
+      InputProps={{ inputProps: { min: 0, max: 23 } }}
+      value={newComputer.time.hour()}
+      onChange={(e) =>
+        setNewComputer((prev) => ({
+          ...prev,
+          time: prev.time.hour(Number(e.target.value)),
+        }))
+      }
+      sx={{
+        backgroundColor: "#ffffff",
+        borderRadius: "4px",
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: "#4caf50",
+          },
+          "&:hover fieldset": {
+            borderColor: "#81c784",
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "#4caf50",
+          },
+        },
+        "& label": {
+          color: "#000000",
+        },
+        "& label.Mui-focused": {
+          color: "#000000",
+        },
+      }}
+    />
+    <TextField
+      label="Minuto"
+      type="number"
+      InputProps={{ inputProps: { min: 0, max: 59 } }}
+      value={newComputer.time.minute()}
+      onChange={(e) =>
+        setNewComputer((prev) => ({
+          ...prev,
+          time: prev.time.minute(Number(e.target.value)),
+        }))
+      }
+      sx={{
+        backgroundColor: "#ffffff",
+        borderRadius: "4px",
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: "#4caf50",
+          },
+          "&:hover fieldset": {
+            borderColor: "#81c784",
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "#4caf50",
+          },
+        },
+        "& label": {
+          color: "#000000",
+        },
+        "& label.Mui-focused": {
+          color: "#000000",
+        },
+      }}
+    />
+    <TextField
+      label="Segundo"
+      type="number"
+      InputProps={{ inputProps: { min: 0, max: 59 } }}
+      value={newComputer.time.second()}
+      onChange={(e) =>
+        setNewComputer((prev) => ({
+          ...prev,
+          time: prev.time.second(Number(e.target.value)),
+        }))
+      }
+      sx={{
+        backgroundColor: "#ffffff",
+        borderRadius: "4px",
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: "#4caf50",
+          },
+          "&:hover fieldset": {
+            borderColor: "#81c784",
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "#4caf50",
+          },
+        },
+        "& label": {
+          color: "#000000",
+        },
+        "& label.Mui-focused": {
+          color: "#000000",
+        },
+      }}
+    />
+  </Box>
+
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleAddComputer}
+    fullWidth
+    sx={{
+      backgroundColor: "#4caf50",
+      "&:hover": {
+        backgroundColor: "#388e3c",
+      },
+    }}
+  >
+    Adicionar
+  </Button>
+</Drawer>
+
       </div>
     </LocalizationProvider>
   );
