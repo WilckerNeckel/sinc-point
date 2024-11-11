@@ -40,7 +40,8 @@ body {
   border-radius: 50%;
   transform: translate(-50%, -50%);
   animation: wave 1.5s infinite;
-  z-index: -1;
+
+  z-index: 0; /* Aumente o z-index para garantir visibilidade */
 }
 
 .server-image {
