@@ -63,7 +63,12 @@ function App() {
           <div className={`server-image-container ${sync ? "syncing" : ""}`}>
             <ServerClock resetTime={resetTime} timeAdjustment={5} />
           </div>
-          <button onClick={handleSync} className="sync-button">
+          <button onClick={handleSync} className="sync-button"
+            style={{
+
+              marginBottom: "20px",
+            }}
+          >
             Sincronizar
           </button>
           {computers.length > 0 && (

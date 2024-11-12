@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import serverImage from "../../assets/server.png";
+import dayjs from "dayjs";
 
 function ServerClock({ resetTime, timeAdjustment }) {
   const [time, setTime] = useState(new Date());
@@ -16,16 +17,14 @@ function ServerClock({ resetTime, timeAdjustment }) {
 
   useEffect(() => {
     if (resetTime) {
-      setTime(new Date(0)); // Reseta o horário para 00:00:00
-      setShowAdjustment(true); // Exibe o popup de ajuste
-
-      // Oculta o popup após 3 segundos
+      setTime(new Date(0));
+      setShowAdjustment(true);
       const hideTimeout = setTimeout(() => setShowAdjustment(false), 3000);
       return () => clearTimeout(hideTimeout);
     }
   }, [resetTime]);
 
-  const formattedTime = time.toLocaleTimeString();
+  const formattedTime = dayjs(time).format("HH:mm:ss");
 
   return (
     <Box

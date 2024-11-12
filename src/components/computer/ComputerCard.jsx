@@ -7,6 +7,8 @@ import dayjs from "dayjs";
 function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
   const [time, setTime] = useState(new Date(initialTime));
   const [showAdjustment, setShowAdjustment] = useState(false);
+  console.log("ip", ip);
+  console.log("type of ip", typeof ip);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,10 +20,9 @@ function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
 
   useEffect(() => {
     if (resetTime) {
-      setTime(new Date(0)); // Reset para 00:00:00
-      setShowAdjustment(true); // Exibe o popup de ajuste após o reset
+      setTime(new Date(0)); 
+      setShowAdjustment(true); 
 
-      // Oculta o popup após 3 segundos
       const hideTimeout = setTimeout(() => setShowAdjustment(false), 3000);
       return () => clearTimeout(hideTimeout);
     }
@@ -39,12 +40,12 @@ function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
           flexDirection: "column",
           cursor: "move",
           backgroundColor: "#ffffff",
-          padding: "8px",
+          padding: "4px",
           borderRadius: "8px",
           boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
           border: "2px solid #4caf50",
-          position: "relative", // Necessário para posicionar o popup
-          width: "160px", // Largura reduzida para deixar mais compacto
+          position: "relative", 
+          width: "160px",
           "&:hover": {
             transform: "scale(1.05)",
             boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.3)",
@@ -55,20 +56,26 @@ function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
         <img
           src={computerImage}
           alt="Computador"
-          style={{ width: "90px", height: "90px", marginBottom: "4px" }} // Aumentei o tamanho e reduzi a margem
+          style={{ width: "100px", height: "90px", marginBottom: "4px" }}
         />
         <Box textAlign="center">
+          {/* Ajuste no Typography para garantir a visibilidade do IP */}
           <Typography
             variant="body1"
             fontWeight="bold"
-            sx={{ marginBottom: "2px" }}
+            sx={{
+              marginBottom: "2px",
+              color: "#000000", // Forçar a cor preta para maior contraste
+              padding: "4px",
+              borderRadius: "4px",
+            }}
           >
-            IP: {ip}
+            IP: {ip || "IP não disponível"}
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ fontSize: "0.8rem" }}
+            sx={{ fontSize: "0.9rem" }}
           >
             Horário: {formattedTime}
           </Typography>
