@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { Box, Typography } from "@mui/material";
 import computerImage from "../../assets/computer.png";
+import dayjs from "dayjs";
 
 function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
   const [time, setTime] = useState(new Date(initialTime));
@@ -26,7 +27,7 @@ function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
     }
   }, [resetTime]);
 
-  const formattedTime = time.toLocaleTimeString();
+  const formattedTime = dayjs(time).format("HH:mm:ss");
 
   return (
     <Draggable>

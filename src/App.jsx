@@ -37,16 +37,18 @@ function App() {
 
   const handleAddComputer = () => {
     if (newComputer.ip && newComputer.date && newComputer.time) {
+      // Configura a data e hora com o formato 24 horas
       const dateTime = newComputer.date
         .hour(newComputer.time.hour())
         .minute(newComputer.time.minute())
         .second(newComputer.time.second());
+
       setComputers([
         ...computers,
         {
           id: computers.length + 1,
           ip: newComputer.ip,
-          time: dateTime.format("YYYY-MM-DDTHH:mm:ss"),
+          time: dateTime.format("YYYY-MM-DD HH:mm:ss"), // Formato 24 horas
           timeAdjustment: 0,
         },
       ]);
@@ -114,14 +116,14 @@ function App() {
                   borderColor: "#81c784",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "#4caf50", // Sempre verde quando focado
+                  borderColor: "#4caf50",
                 },
               },
               "& label": {
-                color: "#000000", // Cor preta para o label
+                color: "#000000",
               },
               "& label.Mui-focused": {
-                color: "#000000", // Cor preta para o label quando focado
+                color: "#000000",
               },
             }}
           />
@@ -152,10 +154,10 @@ function App() {
                 },
               },
               "& label": {
-                color: "#000000", // Cor preta para o label
+                color: "#000000",
               },
               "& label.Mui-focused": {
-                color: "#000000", // Cor preta para o label quando focado
+                color: "#000000",
               },
             }}
           />
