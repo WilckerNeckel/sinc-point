@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ComputerGrid from "./components/computer/ComputerGrid";
 import ServerClock from "./components/server/ServerClock";
 import { Drawer, Box, TextField, Button, Typography } from "@mui/material";
@@ -7,18 +7,20 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "./App.css";
+import { NotificationContext } from "./contexts/NotificationContext";
 
 function App() {
   const [sync, setSync] = useState(false);
   const [resetTime, setResetTime] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { showNotification } = useContext(NotificationContext);
   const [computers, setComputers] = useState([
     {
       id: 1,
       ip: "192.168.1.200",
       time: dayjs().format("DD/MM/YYYY HH:mm:ss"),
       timeAdjustment: 0,
-    }
+    },
   ]);
   const [newComputer, setNewComputer] = useState({
     ip: "",
@@ -104,26 +106,39 @@ function App() {
   };
 
   const handleAddComputer = () => {
-    if (newComputer.ip && newComputer.date && newComputer.time) {
-      // Configura a data e hora com o formato 24 horas
-      const dateTime = newComputer.date
-        .hour(newComputer.time.hour())
-        .minute(newComputer.time.minute())
-        .second(newComputer.time.second());
-
-      setComputers([
-        ...computers,
-        {
-          id: computers.length + 1,
-          ip: newComputer.ip,
-          time: dateTime.format("DD/MM/YYYY HH:mm:ss"), // Formato 24 horas
-
-          timeAdjustment: 0,
-        },
-      ]);
-      setNewComputer({ ip: "", date: dayjs(), time: dayjs() });
+    if (!newComputer.ip || !newComputer.date || !newComputer.time) {
+      showNotification({
+        title: "Erro ao adicionar computador",
+        message: "Preencha todos os campos",
+        type: "error",
+      });
+      return;
     }
-    
+    if (computers.find((computer) => computer.ip === newComputer.ip)) {
+      showNotification({
+        title: "Erro ao adicionar computador",
+        message: "IP já cadastrado",
+        type: "error",
+      });
+      return;
+    }
+
+    const dateTime = newComputer.date
+      .hour(newComputer.time.hour())
+      .minute(newComputer.time.minute())
+      .second(newComputer.time.second());
+
+    setComputers([
+      ...computers,
+      {
+        id: computers.length + 1,
+        ip: newComputer.ip,
+        time: dateTime.format("DD/MM/YYYY HH:mm:ss"), // Formato 24 horas
+
+        timeAdjustment: 0,
+      },
+    ]);
+    setNewComputer({ ip: "", date: dayjs(), time: dayjs() });
   };
 
   return (
@@ -131,7 +146,11 @@ function App() {
       <div className="app-container">
         <div className="center-content">
           <div className={`server-image-container ${sync ? "syncing" : ""}`}>
-            <ServerClock ip={computers[0].ip} time={computers[0].time} timeAdjustment={computers[0].timeAdjustment} />
+            <ServerClock
+              ip={computers[0].ip}
+              time={computers[0].time}
+              timeAdjustment={computers[0].timeAdjustment}
+            />
           </div>
           <button
             onClick={handleSync}
