@@ -62,7 +62,6 @@ function App() {
     setComputers((prev) => prev.filter((computer) => computer.ip !== ip));
   };
 
-
   function applyBerkeleyAlgorithm(clockList) {
     // Converte os tempos para objetos Day.js
     const times = clockList.map((clock) =>
@@ -104,6 +103,16 @@ function App() {
     setNewComputer((prev) => ({ ...prev, [name]: value }));
   };
 
+  const isValidIP = (ip) => {
+    const parts = ip.split(".");
+    if (parts.length !== 4) return false;
+    for (let part of parts) {
+      const num = parseInt(part, 10);
+      if (isNaN(num) || num < 0 || num > 255) return false;
+    }
+    return true;
+  };
+
   const handleAddComputer = () => {
     if (!newComputer.ip || !newComputer.date || !newComputer.time) {
       showNotification({
@@ -117,6 +126,15 @@ function App() {
       showNotification({
         title: "Erro ao adicionar computador",
         message: "IP já cadastrado",
+        type: "error",
+      });
+      return;
+    }
+
+    if (!isValidIP(newComputer.ip)) {
+      showNotification({
+        title: "Erro ao adicionar computador",
+        message: "IP inválido",
         type: "error",
       });
       return;
