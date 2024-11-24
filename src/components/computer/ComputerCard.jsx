@@ -5,14 +5,31 @@ import computerImage from "../../assets/computer.png";
 
 function ComputerCard({ ip, time, timeAdjustment }) {
   const [showAdjustment, setShowAdjustment] = useState(false);
+  const [formattedAdjustment, setFormattedAdjustment] = useState("");
 
   useEffect(() => {
     if (timeAdjustment !== 0) {
+      // Define se o ajuste será mostrado
       setShowAdjustment(true);
+
+      // Calcula o ajuste formatado no formato HH:MM:SS
+      const absAdjustment = Math.abs(timeAdjustment); // Obtém valor absoluto para evitar números negativos
+      const hours = Math.floor(absAdjustment / 3600000); // 1 hora = 3600000 ms
+      const minutes = Math.floor((absAdjustment % 3600000) / 60000); // 1 minuto = 60000 ms
+      const seconds = Math.floor((absAdjustment % 60000) / 1000); // 1 segundo = 1000 ms
+
+      const formatted = `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+      setFormattedAdjustment(formatted);
+
+      // Oculta o ajuste após 3 segundos
       const timeout = setTimeout(() => setShowAdjustment(false), 3000);
       return () => clearTimeout(timeout);
     }
   }, [timeAdjustment]);
+
 
   return (
     <Draggable>
@@ -59,7 +76,6 @@ function ComputerCard({ ip, time, timeAdjustment }) {
             variant="body2"
             color="text.primary"
             sx={{ fontSize: "0.9rem" }}
-
           >
             {time}
           </Typography>
@@ -88,7 +104,7 @@ function ComputerCard({ ip, time, timeAdjustment }) {
               {timeAdjustment > 0 ? "▲" : "▼"}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {Math.abs(timeAdjustment)}ms
+              {formattedAdjustment}
             </Typography>
           </Box>
         )}

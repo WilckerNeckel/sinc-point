@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import serverImage from "../../assets/server.png";
-import dayjs from "dayjs";
 
-function ServerClock({  ip, time, timeAdjustment }) {
+function ServerClock({ ip, time, timeAdjustment }) {
   const [showAdjustment, setShowAdjustment] = useState(false);
+  const [formattedAdjustment, setFormattedAdjustment] = useState("");
 
   useEffect(() => {
     if (timeAdjustment !== 0) {
       setShowAdjustment(true);
+
+      // Calcula o ajuste formatado no formato HH:MM:SS
+      const absAdjustment = Math.abs(timeAdjustment); // Obtém valor absoluto para evitar números negativos
+      const hours = Math.floor(absAdjustment / 3600000); // 1 hora = 3600000 ms
+      const minutes = Math.floor((absAdjustment % 3600000) / 60000); // 1 minuto = 60000 ms
+      const seconds = Math.floor((absAdjustment % 60000) / 1000); // 1 segundo = 1000 ms
+
+      const formatted = `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+      setFormattedAdjustment(formatted);
+
+      // Oculta o ajuste após 3 segundos
       const timeout = setTimeout(() => setShowAdjustment(false), 3000);
       return () => clearTimeout(timeout);
     }
@@ -42,17 +56,17 @@ function ServerClock({  ip, time, timeAdjustment }) {
         Servidor Central
       </Typography>
       <Typography
-            variant="h6"
-            fontWeight="bold"
-            sx={{
-              marginBottom: "2px",
-              color: "#ffffff",
-              padding: "4px",
-              borderRadius: "4px",
-            }}
-          >
-            {ip || "IP não disponível"}
-          </Typography>
+        variant="h6"
+        fontWeight="bold"
+        sx={{
+          marginBottom: "2px",
+          color: "#ffffff",
+          padding: "4px",
+          borderRadius: "4px",
+        }}
+      >
+        {ip || "IP não disponível"}
+      </Typography>
       <Typography variant="" style={{ color: "#ffffff", marginTop: "4px" }}>
         {time}
       </Typography>
@@ -80,7 +94,7 @@ function ServerClock({  ip, time, timeAdjustment }) {
             {timeAdjustment > 0 ? "▲" : "▼"}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {Math.abs(timeAdjustment)}s
+            {formattedAdjustment}
           </Typography>
         </Box>
       )}
