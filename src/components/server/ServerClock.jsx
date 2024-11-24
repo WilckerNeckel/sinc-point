@@ -3,28 +3,16 @@ import { Box, Typography } from "@mui/material";
 import serverImage from "../../assets/server.png";
 import dayjs from "dayjs";
 
-function ServerClock({ resetTime, timeAdjustment }) {
-  const [time, setTime] = useState(new Date());
+function ServerClock({  ip, time, timeAdjustment }) {
   const [showAdjustment, setShowAdjustment] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTime((prevTime) => new Date(prevTime.getTime() + 1000));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (resetTime) {
-      setTime(new Date(0));
+    if (timeAdjustment !== 0) {
       setShowAdjustment(true);
-      const hideTimeout = setTimeout(() => setShowAdjustment(false), 3000);
-      return () => clearTimeout(hideTimeout);
+      const timeout = setTimeout(() => setShowAdjustment(false), 3000);
+      return () => clearTimeout(timeout);
     }
-  }, [resetTime]);
-
-  const formattedTime = dayjs(time).format("HH:mm:ss");
+  }, [timeAdjustment]);
 
   return (
     <Box
@@ -51,10 +39,22 @@ function ServerClock({ resetTime, timeAdjustment }) {
         variant="h6"
         style={{ color: "#81c784", marginTop: "8px", fontWeight: "bold" }}
       >
-        Horário do Servidor
+        Servidor Central
       </Typography>
-      <Typography variant="h6" style={{ color: "#ffffff", marginTop: "4px" }}>
-        {formattedTime}
+      <Typography
+            variant="h6"
+            fontWeight="bold"
+            sx={{
+              marginBottom: "2px",
+              color: "#ffffff",
+              padding: "4px",
+              borderRadius: "4px",
+            }}
+          >
+            {ip || "IP não disponível"}
+          </Typography>
+      <Typography variant="" style={{ color: "#ffffff", marginTop: "4px" }}>
+        {time}
       </Typography>
 
       {showAdjustment && (

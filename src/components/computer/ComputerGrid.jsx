@@ -9,9 +9,7 @@ function ComputerGrid({ computers, resetTime, setComputers }) {
           key={computer?.id}
           ip={computer?.ip}
           time={computer?.time}
-          resetTime={resetTime}
           timeAdjustment={computer?.timeAdjustment}
-          setComputers={setComputers}
         />
       ))}
     </div>

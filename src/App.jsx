@@ -12,7 +12,14 @@ function App() {
   const [sync, setSync] = useState(false);
   const [resetTime, setResetTime] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [computers, setComputers] = useState([]);
+  const [computers, setComputers] = useState([
+    {
+      id: 1,
+      ip: "192.168.1.200",
+      time: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+      timeAdjustment: 0,
+    }
+  ]);
   const [newComputer, setNewComputer] = useState({
     ip: "",
     date: dayjs(),
@@ -124,7 +131,7 @@ function App() {
       <div className="app-container">
         <div className="center-content">
           <div className={`server-image-container ${sync ? "syncing" : ""}`}>
-            <ServerClock resetTime={resetTime} timeAdjustment={5} />
+            <ServerClock ip={computers[0].ip} time={computers[0].time} timeAdjustment={computers[0].timeAdjustment} />
           </div>
           <button
             onClick={handleSync}
@@ -138,7 +145,7 @@ function App() {
           {computers.length > 0 && (
             <ComputerGrid
               resetTime={resetTime}
-              computers={computers}
+              computers={computers.slice(1)}
               setComputers={setComputers}
             />
           )}

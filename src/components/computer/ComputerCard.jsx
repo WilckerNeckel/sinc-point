@@ -53,14 +53,15 @@ function ComputerCard({ ip, time, timeAdjustment }) {
               borderRadius: "4px",
             }}
           >
-            IP: {ip || "IP não disponível"}
+            {ip || "IP não disponível"}
           </Typography>
           <Typography
             variant="body2"
-            color="text.secondary"
+            color="text.primary"
             sx={{ fontSize: "0.9rem" }}
+
           >
-            Horário: {time}
+            {time}
           </Typography>
         </Box>
 
