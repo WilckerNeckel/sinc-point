@@ -161,6 +161,21 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="app-container">
+        <div className="title-container">
+          <Typography
+            variant="h3"
+            sx={{
+              color: "#81c784",
+              fontFamily: "'Pacifico', cursive", // Fonte cursiva e moderna
+              textAlign: "center",
+              marginBottom: "40px", // Ajuste para espaçamento
+              textShadow: "1px 16px 12px rgba(0, 0, 0, 0.8)",
+            }}
+          >
+            SincPoint
+          </Typography>
+        </div>
+
         <div className="center-content">
           <div className={`server-image-container ${sync ? "syncing" : ""}`}>
             <ServerClock

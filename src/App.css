@@ -1,8 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #1a1a1d, #333) fixed;
   overflow: hidden;
+}
+
+.title-container {
+  position: absolute;
+  top: 20px; /* Ajuste a distância do topo */
+  left: 50%;
+  /* bottom: 20px; Ajuste a distância do fundo */
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10; /* Certifique-se de que está acima de outros elementos */
 }
 
 .app-container {
@@ -80,6 +91,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 50px; /* Aumente este valor para mais espaço */
 }
 
 .drawer-indicator {

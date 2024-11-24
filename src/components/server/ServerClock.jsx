@@ -10,11 +10,10 @@ function ServerClock({ ip, time, timeAdjustment }) {
     if (timeAdjustment !== 0) {
       setShowAdjustment(true);
 
-      // Calcula o ajuste formatado no formato HH:MM:SS
-      const absAdjustment = Math.abs(timeAdjustment); // Obtém valor absoluto para evitar números negativos
-      const hours = Math.floor(absAdjustment / 3600000); // 1 hora = 3600000 ms
-      const minutes = Math.floor((absAdjustment % 3600000) / 60000); // 1 minuto = 60000 ms
-      const seconds = Math.floor((absAdjustment % 60000) / 1000); // 1 segundo = 1000 ms
+      const absAdjustment = Math.abs(timeAdjustment); 
+      const hours = Math.floor(absAdjustment / 3600000); 
+      const minutes = Math.floor((absAdjustment % 3600000) / 60000); 
+      const seconds = Math.floor((absAdjustment % 60000) / 1000); 
 
       const formatted = `${hours.toString().padStart(2, "0")}:${minutes
         .toString()
@@ -22,7 +21,6 @@ function ServerClock({ ip, time, timeAdjustment }) {
 
       setFormattedAdjustment(formatted);
 
-      // Oculta o ajuste após 3 segundos
       const timeout = setTimeout(() => setShowAdjustment(false), 3000);
       return () => clearTimeout(timeout);
     }
@@ -36,7 +34,7 @@ function ServerClock({ ip, time, timeAdjustment }) {
         alignItems: "center",
         justifyContent: "center",
         position: "relative",
-        padding: "20px",
+        padding: "10px",
         backgroundColor: "#333",
         borderRadius: "12px",
         boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.5)",
