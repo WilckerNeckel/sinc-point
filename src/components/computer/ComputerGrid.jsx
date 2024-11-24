@@ -1,7 +1,7 @@
 import React from 'react';
 import ComputerCard from './ComputerCard';
 
-function ComputerGrid({ computers, resetTime, setComputers }) {
+function ComputerGrid({ computers, onDeleteCard }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
       {computers.map((computer) => (
@@ -10,6 +10,7 @@ function ComputerGrid({ computers, resetTime, setComputers }) {
           ip={computer?.ip}
           time={computer?.time}
           timeAdjustment={computer?.timeAdjustment}
+          onDeleteCard={onDeleteCard}
         />
       ))}
     </div>

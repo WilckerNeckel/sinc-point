@@ -58,11 +58,10 @@ function App() {
     }
   }, [resetTime]);
 
-  useEffect(() => {
-    if (computers) {
-      console.log("computers ", computers);
-    }
-  }, [computers]);
+  const onDeleteCard = (ip) => {
+    setComputers((prev) => prev.filter((computer) => computer.ip !== ip));
+  };
+
 
   function applyBerkeleyAlgorithm(clockList) {
     // Converte os tempos para objetos Day.js
@@ -166,6 +165,7 @@ function App() {
               resetTime={resetTime}
               computers={computers.slice(1)}
               setComputers={setComputers}
+              onDeleteCard={onDeleteCard}
             />
           )}
         </div>
