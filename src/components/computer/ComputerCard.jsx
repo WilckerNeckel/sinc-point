@@ -4,31 +4,81 @@ import { Box, Typography } from "@mui/material";
 import computerImage from "../../assets/computer.png";
 import dayjs from "dayjs";
 
-function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
-  const [time, setTime] = useState(new Date(initialTime));
+function ComputerCard({ ip, resetTime, time, timeAdjustment, setComputers }) {
+  // const [time, setTime] = useState(dayjs(initialTime, "YYYY-MM-DD HH:mm:ss"));
   const [showAdjustment, setShowAdjustment] = useState(false);
-  console.log("ip", ip);
-  console.log("type of ip", typeof ip);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime((prevTime) => new Date(prevTime.getTime() + 1000));
+      setComputers((prev) => {
+        return prev.map((computer) => {
+          if (computer.ip === ip) {
+            return {
+              ...computer,
+              time: computer.time.add(1, "second"),
+            };
+          }
+          return computer;
+        });
+      });
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setTime((prevTime) => prevTime.add(1, "second")); // Adiciona 1 segundo usando Day.js
+  //   }, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  const adjustTime = (milliseconds, baseTime = dayjs()) => {
+    return baseTime.add(milliseconds, "millisecond"); // Retorna um objeto dayjs
+  };
+
   useEffect(() => {
     if (resetTime) {
-      setTime(new Date(0)); 
-      setShowAdjustment(true); 
+      setShowAdjustment(true);
 
       const hideTimeout = setTimeout(() => setShowAdjustment(false), 3000);
-      return () => clearTimeout(hideTimeout);
+
+      setComputers((prev) => {
+        return prev.map((computer) => {
+          if (computer.ip === ip) {
+            return {
+              ...computer,
+              time: adjustTime(timeAdjustment, computer.time),
+            };
+          }
+          return computer;
+        });
+      });
+
+      return () => {
+        clearTimeout(hideTimeout);
+      };
     }
   }, [resetTime]);
 
-  const formattedTime = dayjs(time).format("HH:mm:ss");
+  // useEffect(() => {
+  //   if (resetTime) {
+  //     setShowAdjustment(true);
+
+  //     const hideTimeout = setTimeout(() => setShowAdjustment(false), 3000);
+
+  //     setTime((prevTime) => adjustTime(timeAdjustment, prevTime));
+
+  //     return () => {
+  //       clearTimeout(hideTimeout);
+
+  //     }
+
+  //   }
+  // }, [resetTime]);
+
+  const formattedTime = time
 
   return (
     <Draggable>
@@ -44,7 +94,7 @@ function ComputerCard({ ip, resetTime, time: initialTime, timeAdjustment }) {
           borderRadius: "8px",
           boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
           border: "2px solid #4caf50",
-          position: "relative", 
+          position: "relative",
           width: "160px",
           "&:hover": {
             transform: "scale(1.05)",

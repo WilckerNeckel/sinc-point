@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ComputerGrid from "./components/computer/ComputerGrid";
 import ServerClock from "./components/server/ServerClock";
 import { Drawer, Box, TextField, Button, Typography } from "@mui/material";
@@ -7,6 +7,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "./App.css";
+
 
 function App() {
   const [sync, setSync] = useState(false);
@@ -19,6 +20,29 @@ function App() {
     time: dayjs(),
   });
 
+  function applyBerkeleyAlgorithm(clockList) {
+    // Converte os tempos para objetos Day.js
+    const times = clockList.map((clock) => dayjs(clock.time, "YYYY-MM-DD HH:mm:ss"));
+  
+    // Calcula o tempo médio em milissegundos
+    const avgTimeMs =
+      times.reduce((total, time) => total + time.valueOf(), 0) / times.length;
+  
+    // Atualiza os ajustes em milissegundos
+    const updatedClockList = clockList.map((clock, index) => {
+      const currentMs = times[index].valueOf();
+      const adjustmentMs = Math.round(avgTimeMs - currentMs); // Ajuste em milissegundos
+  
+      return {
+        ...clock,
+        timeAdjustment: adjustmentMs, // Agora apenas milissegundos
+      };
+    });
+  
+    return updatedClockList;
+  }
+  
+
   const handleSync = () => {
     setSync(true);
     setResetTime(false);
@@ -27,8 +51,17 @@ function App() {
     setTimeout(() => {
       setSync(false);
       setResetTime(true);
+      setComputers((prev) => applyBerkeleyAlgorithm(prev));
     }, 4000);
+
+
   };
+
+  useEffect(() => {
+    if (computers) {
+      console.log("computers ", computers);
+    }
+  }, [computers]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -54,6 +87,7 @@ function App() {
       ]);
       setNewComputer({ ip: "", date: dayjs(), time: dayjs() });
     }
+    console.log("computers: ", computers);
   };
 
   return (
@@ -63,16 +97,17 @@ function App() {
           <div className={`server-image-container ${sync ? "syncing" : ""}`}>
             <ServerClock resetTime={resetTime} timeAdjustment={5} />
           </div>
-          <button onClick={handleSync} className="sync-button"
+          <button
+            onClick={handleSync}
+            className="sync-button"
             style={{
-
               marginBottom: "20px",
             }}
           >
             Sincronizar
           </button>
           {computers.length > 0 && (
-            <ComputerGrid resetTime={resetTime} computers={computers} />
+            <ComputerGrid resetTime={resetTime} computers={computers} setComputers={setComputers} />
           )}
         </div>
 
