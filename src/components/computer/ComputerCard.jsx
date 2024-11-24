@@ -2,83 +2,17 @@ import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { Box, Typography } from "@mui/material";
 import computerImage from "../../assets/computer.png";
-import dayjs from "dayjs";
 
-function ComputerCard({ ip, resetTime, time, timeAdjustment, setComputers }) {
-  // const [time, setTime] = useState(dayjs(initialTime, "YYYY-MM-DD HH:mm:ss"));
+function ComputerCard({ ip, time, timeAdjustment }) {
   const [showAdjustment, setShowAdjustment] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setComputers((prev) => {
-        return prev.map((computer) => {
-          if (computer.ip === ip) {
-            return {
-              ...computer,
-              time: computer.time.add(1, "second"),
-            };
-          }
-          return computer;
-        });
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setTime((prevTime) => prevTime.add(1, "second")); // Adiciona 1 segundo usando Day.js
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  const adjustTime = (milliseconds, baseTime = dayjs()) => {
-    return baseTime.add(milliseconds, "millisecond"); // Retorna um objeto dayjs
-  };
-
-  useEffect(() => {
-    if (resetTime) {
+    if (timeAdjustment !== 0) {
       setShowAdjustment(true);
-
-      const hideTimeout = setTimeout(() => setShowAdjustment(false), 3000);
-
-      setComputers((prev) => {
-        return prev.map((computer) => {
-          if (computer.ip === ip) {
-            return {
-              ...computer,
-              time: adjustTime(timeAdjustment, computer.time),
-            };
-          }
-          return computer;
-        });
-      });
-
-      return () => {
-        clearTimeout(hideTimeout);
-      };
+      const timeout = setTimeout(() => setShowAdjustment(false), 3000);
+      return () => clearTimeout(timeout);
     }
-  }, [resetTime]);
-
-  // useEffect(() => {
-  //   if (resetTime) {
-  //     setShowAdjustment(true);
-
-  //     const hideTimeout = setTimeout(() => setShowAdjustment(false), 3000);
-
-  //     setTime((prevTime) => adjustTime(timeAdjustment, prevTime));
-
-  //     return () => {
-  //       clearTimeout(hideTimeout);
-
-  //     }
-
-  //   }
-  // }, [resetTime]);
-
-  const formattedTime = time
+  }, [timeAdjustment]);
 
   return (
     <Draggable>
@@ -109,13 +43,12 @@ function ComputerCard({ ip, resetTime, time, timeAdjustment, setComputers }) {
           style={{ width: "100px", height: "90px", marginBottom: "4px" }}
         />
         <Box textAlign="center">
-          {/* Ajuste no Typography para garantir a visibilidade do IP */}
           <Typography
             variant="body1"
             fontWeight="bold"
             sx={{
               marginBottom: "2px",
-              color: "#000000", // Forçar a cor preta para maior contraste
+              color: "#000000",
               padding: "4px",
               borderRadius: "4px",
             }}
@@ -127,7 +60,7 @@ function ComputerCard({ ip, resetTime, time, timeAdjustment, setComputers }) {
             color="text.secondary"
             sx={{ fontSize: "0.9rem" }}
           >
-            Horário: {formattedTime}
+            Horário: {time}
           </Typography>
         </Box>
 
@@ -154,7 +87,7 @@ function ComputerCard({ ip, resetTime, time, timeAdjustment, setComputers }) {
               {timeAdjustment > 0 ? "▲" : "▼"}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {Math.abs(timeAdjustment)}s
+              {Math.abs(timeAdjustment)}ms
             </Typography>
           </Box>
         )}

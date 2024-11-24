@@ -8,7 +8,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "./App.css";
 
-
 function App() {
   const [sync, setSync] = useState(false);
   const [resetTime, setResetTime] = useState(false);
@@ -20,28 +19,65 @@ function App() {
     time: dayjs(),
   });
 
+  // Atualiza os tempos de todos os computadores em 1 segundo a cada intervalo
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setComputers((prevComputers) =>
+        prevComputers.map((computer) => ({
+          ...computer,
+          time: dayjs(computer.time, "DD/MM/YYYY HH:mm:ss")
+            .add(1, "second")
+            .format("DD/MM/YYYY HH:mm:ss"),
+        }))
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Ajusta os tempos de acordo com o algoritmo de Berkeley quando `resetTime` é true
+  useEffect(() => {
+    if (resetTime) {
+      setComputers((prevComputers) =>
+        prevComputers.map((computer) => ({
+          ...computer,
+          time: dayjs(computer.time, "DD/MM/YYYY HH:mm:ss")
+            .add(computer.timeAdjustment, "millisecond")
+            .format("DD/MM/YYYY HH:mm:ss"),
+        }))
+      );
+    }
+  }, [resetTime]);
+
+  useEffect(() => {
+    if (computers) {
+      console.log("computers ", computers);
+    }
+  }, [computers]);
+
   function applyBerkeleyAlgorithm(clockList) {
     // Converte os tempos para objetos Day.js
-    const times = clockList.map((clock) => dayjs(clock.time, "YYYY-MM-DD HH:mm:ss"));
-  
+    const times = clockList.map((clock) =>
+      dayjs(clock.time, "DD/MM/YYYY HH:mm:ss")
+    );
+
     // Calcula o tempo médio em milissegundos
     const avgTimeMs =
       times.reduce((total, time) => total + time.valueOf(), 0) / times.length;
-  
+
     // Atualiza os ajustes em milissegundos
     const updatedClockList = clockList.map((clock, index) => {
       const currentMs = times[index].valueOf();
       const adjustmentMs = Math.round(avgTimeMs - currentMs); // Ajuste em milissegundos
-  
+
       return {
         ...clock,
         timeAdjustment: adjustmentMs, // Agora apenas milissegundos
       };
     });
-  
+
     return updatedClockList;
   }
-  
 
   const handleSync = () => {
     setSync(true);
@@ -50,18 +86,10 @@ function App() {
     // Temporizador para desativar o efeito de sincronização
     setTimeout(() => {
       setSync(false);
-      setResetTime(true);
       setComputers((prev) => applyBerkeleyAlgorithm(prev));
+      setResetTime(true);
     }, 4000);
-
-
   };
-
-  useEffect(() => {
-    if (computers) {
-      console.log("computers ", computers);
-    }
-  }, [computers]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -81,13 +109,14 @@ function App() {
         {
           id: computers.length + 1,
           ip: newComputer.ip,
-          time: dateTime.format("YYYY-MM-DD HH:mm:ss"), // Formato 24 horas
+          time: dateTime.format("DD/MM/YYYY HH:mm:ss"), // Formato 24 horas
+
           timeAdjustment: 0,
         },
       ]);
       setNewComputer({ ip: "", date: dayjs(), time: dayjs() });
     }
-    console.log("computers: ", computers);
+    
   };
 
   return (
@@ -107,7 +136,11 @@ function App() {
             Sincronizar
           </button>
           {computers.length > 0 && (
-            <ComputerGrid resetTime={resetTime} computers={computers} setComputers={setComputers} />
+            <ComputerGrid
+              resetTime={resetTime}
+              computers={computers}
+              setComputers={setComputers}
+            />
           )}
         </div>
 
