@@ -150,7 +150,7 @@ function App() {
       {
         id: computers.length + 1,
         ip: newComputer.ip,
-        time: dateTime.format("DD/MM/YYYY HH:mm:ss"), // Formato 24 horas
+        time: dateTime.format("DD/MM/YYYY HH:mm:ss"), 
 
         timeAdjustment: 0,
       },
@@ -166,9 +166,9 @@ function App() {
             variant="h3"
             sx={{
               color: "#81c784",
-              fontFamily: "'Pacifico', cursive", // Fonte cursiva e moderna
+              fontFamily: "'Pacifico', cursive", 
               textAlign: "center",
-              marginBottom: "40px", // Ajuste para espaçamento
+              marginBottom: "40px", 
               textShadow: "1px 16px 12px rgba(0, 0, 0, 0.8)",
             }}
           >

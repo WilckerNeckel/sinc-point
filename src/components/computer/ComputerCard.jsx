@@ -51,7 +51,6 @@ function ComputerCard({ ip, time, timeAdjustment, onDeleteCard }) {
           },
         }}
       >
-        {/* Botão "X" posicionado fora do card */}
         <IconButton
           sx={{
             position: "absolute",
@@ -70,7 +69,6 @@ function ComputerCard({ ip, time, timeAdjustment, onDeleteCard }) {
           <CloseIcon sx={{ color: "#d32f2f", fontSize:"16px" }}   />
         </IconButton>
 
-        {/* Imagem e informações do computador */}
         <img
           src={computerImage}
           alt="Computador"
