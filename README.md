@@ -6,6 +6,8 @@ SincPoint é um simulador de relógios lógicos que utiliza o Algoritmo de Berke
 
 - Adicionar computadores com IPs e horários personalizados.
 - Exibir o horário atual de cada computador na interface.
+- Possibilidade de mover card do computador
+- Possibilidade de deletar algum computador
 - Sincronizar os horários utilizando o **Algoritmo de Berkeley**, ajustando as diferenças de tempo entre os computadores.
 - Interface interativa e responsiva para uma experiência amigável em qualquer dispositivo.
 
@@ -55,7 +57,7 @@ SincPoint é um simulador de relógios lógicos que utiliza o Algoritmo de Berke
 
 Você pode acessar a aplicação hospedada pelo link abaixo:
 
-[**SincPoint - Simulador de Relógios Lógicos**](https://seu-link-deploy-aqui.com)
+[**SincPoint - Simulador de Relógios Lógicos**](https://sincpoint.nexsyn.com.br)
 
 ## Estrutura do Projeto
 
