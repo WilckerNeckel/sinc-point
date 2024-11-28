@@ -95,7 +95,7 @@ function App() {
       setSync(false);
       setComputers((prev) => applyBerkeleyAlgorithm(prev));
       setResetTime(true);
-    }, 4000);
+    }, 7400);
   };
 
   const handleInputChange = (e) => {
@@ -199,6 +199,7 @@ function App() {
               computers={computers.slice(1)}
               setComputers={setComputers}
               onDeleteCard={onDeleteCard}
+              sync={sync}
             />
           )}
         </div>

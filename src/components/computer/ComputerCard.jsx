@@ -3,10 +3,12 @@ import Draggable from "react-draggable";
 import { Box, Typography, IconButton } from "@mui/material";
 import computerImage from "../../assets/computer.png";
 import CloseIcon from "@mui/icons-material/Close"; // Ícone "X" do MUI
+import "./ComputerCard.css";
 
-function ComputerCard({ ip, time, timeAdjustment, onDeleteCard }) {
+function ComputerCard({ ip, time, timeAdjustment, onDeleteCard, sync }) {
   const [showAdjustment, setShowAdjustment] = useState(false);
   const [formattedAdjustment, setFormattedAdjustment] = useState("");
+  const [classCss, setClassCss] = useState("");
 
   useEffect(() => {
     if (timeAdjustment !== 0) {
@@ -23,14 +25,31 @@ function ComputerCard({ ip, time, timeAdjustment, onDeleteCard }) {
 
       setFormattedAdjustment(formatted);
 
-      const timeout = setTimeout(() => setShowAdjustment(false), 3000);
+      const timeout = setTimeout(() => setShowAdjustment(false), 10000);
       return () => clearTimeout(timeout);
     }
   }, [timeAdjustment]);
 
+  useEffect(() => {
+    if (sync) {
+      setTimeout(() => {
+        setClassCss(sync ? "syncing" : "");
+      }, 3100);
+
+      console.log("sync = ", sync);
+      console.log("syncing");
+    } else {
+      setClassCss("");
+    }
+    return () => {
+      clearTimeout();
+    };
+  }, [sync]);
+
   return (
     <Draggable>
       <Box
+        className={classCss}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -54,19 +73,19 @@ function ComputerCard({ ip, time, timeAdjustment, onDeleteCard }) {
         <IconButton
           sx={{
             position: "absolute",
-            top: "-15px", 
-            right: "-15px", 
+            top: "-15px",
+            right: "-15px",
             backgroundColor: "rgba(202, 202, 202, 0.8)",
             "&:hover": {
-              backgroundColor: "rgba(255, 0, 0, 0.8)", 
+              backgroundColor: "rgba(255, 0, 0, 0.8)",
             },
-            boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)", 
+            boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.2)",
           }}
           onClick={() => {
             onDeleteCard(ip);
           }}
         >
-          <CloseIcon sx={{ color: "#d32f2f", fontSize:"16px" }}   />
+          <CloseIcon sx={{ color: "#d32f2f", fontSize: "16px" }} />
         </IconButton>
 
         <img

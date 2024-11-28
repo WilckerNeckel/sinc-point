@@ -21,7 +21,7 @@ function ServerClock({ ip, time, timeAdjustment }) {
 
       setFormattedAdjustment(formatted);
 
-      const timeout = setTimeout(() => setShowAdjustment(false), 3000);
+      const timeout = setTimeout(() => setShowAdjustment(false), 10000);
       return () => clearTimeout(timeout);
     }
   }, [timeAdjustment]);

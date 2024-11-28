@@ -8,12 +8,11 @@ body {
 
 .title-container {
   position: absolute;
-  top: 20px; /* Ajuste a distância do topo */
+  top: 20px; 
   left: 50%;
-  /* bottom: 20px; Ajuste a distância do fundo */
   transform: translateX(-50%);
   text-align: center;
-  z-index: 10; /* Certifique-se de que está acima de outros elementos */
+  z-index: 10; 
   margin-bottom: "50px";
 }
 
@@ -24,7 +23,7 @@ body {
   min-height: 100vh;
   padding: 20px;
   position: relative;
-  min-width: 100vw; /* Adicione esta linha */
+  min-width: 100vw;
 }
 
 .server-container {
@@ -46,15 +45,29 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border: 2px solid rgba(76, 175, 80, 0.6);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -70%);
   animation: wave 1.5s infinite;
-
-  z-index: 0; /* Aumente o z-index para garantir visibilidade */
+  z-index: 3; 
 }
+
+@keyframes wave {
+  0% {
+    width: 150px;
+    height: 150px;
+    opacity: 1;
+  }
+  100% {
+    width: 450px;
+    height: 450px;
+    opacity: 0;
+  }
+}
+
+
 
 .server-image {
   width: 200px;
@@ -118,15 +131,3 @@ body {
   background-color: #388e3c;
 }
 
-@keyframes wave {
-  0% {
-    width: 180px;
-    height: 180px;
-    opacity: 1;
-  }
-  100% {
-    width: 400px;
-    height: 400px;
-    opacity: 0;
-  }
-}
