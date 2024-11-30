@@ -96,7 +96,6 @@ function App() {
       console.log("start execution ", startExecution)
       setSync(false);
       setComputers((prev) => applyBerkeleyAlgorithm(prev));
-      // console.log("time", elapsedTime)
       setResetTime(true);
       const endExecution = performance.now(); 
       console.log("end execution ", endExecution)
