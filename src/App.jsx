@@ -82,19 +82,32 @@ function App() {
         timeAdjustment: adjustmentMs, // Agora apenas milissegundos
       };
     });
-
     return updatedClockList;
   }
 
   const handleSync = () => {
+     // Captura o tempo de início imediato
     setSync(true);
     setResetTime(false);
 
     // Temporizador para desativar o efeito de sincronização
     setTimeout(() => {
+      const startExecution = performance.now(); 
+      console.log("start execution ", startExecution)
       setSync(false);
       setComputers((prev) => applyBerkeleyAlgorithm(prev));
+      // console.log("time", elapsedTime)
       setResetTime(true);
+      const endExecution = performance.now(); 
+      console.log("end execution ", endExecution)
+      const elapsedExecution = (endExecution - startExecution) / 1000; 
+      
+      console.log("elapsed variable", elapsedExecution)
+      showNotification({
+        title: "Relógios sincronizados",
+        message: `Tempo: ${elapsedExecution} segundos.`,
+        type: "success",
+      });
     }, 7400);
   };
 

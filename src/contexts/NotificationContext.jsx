@@ -75,7 +75,7 @@ import {
         <Snackbar
           open={open}
           TransitionComponent={Slide}
-          autoHideDuration={2000}
+          autoHideDuration={4000}
           onClose={() => setOpen(false)}
           anchorOrigin={notificationProps.anchorOrigin}
         >
