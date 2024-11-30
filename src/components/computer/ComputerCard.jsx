@@ -36,8 +36,6 @@ function ComputerCard({ ip, time, timeAdjustment, onDeleteCard, sync }) {
         setClassCss(sync ? "syncing" : "");
       }, 3100);
 
-      console.log("sync = ", sync);
-      console.log("syncing");
     } else {
       setClassCss("");
     }
