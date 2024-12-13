@@ -84,3 +84,6 @@ In the application, the implementation works as follows:
 1. The times of each computer are sent to the server.
 2. The server calculates the clocks' and average time difference.
 3. Each computer receives a proportional adjustment for synchronization.
+
+# Bugs
+## In case of execution error, pay attention to the log and correct what is necessary.
