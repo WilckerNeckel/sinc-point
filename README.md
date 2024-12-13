@@ -6,8 +6,8 @@
 
 - Add computers with custom IPs and times.
 - Display the current time of each computer in the interface.
-- Possibility to move a computer card
-- Possibility to delete a computer
+- Possibility to move a computer card.
+- Possibility to delete a computer.
 - Synchronize times using the **Berkeley Algorithm**, adjusting for time differences between computers.
 - Interactive and responsive interface for a user-friendly experience on any device.
 - CC BY 4.0.
