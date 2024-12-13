@@ -1,6 +1,6 @@
 SincPoint is a logical clock simulator that uses the Berkeley Algorithm for clock synchronization. With this application, you can add computers with different times and automatically synchronize them to align them based on an average time calculation.
 # Figure 1
-![animation](https://github.com/WilckerNeckel/sinc-point/tree/main/Images/1.png)
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/1.png)
 
 ## Features
 
