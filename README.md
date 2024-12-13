@@ -33,13 +33,11 @@
 ## Figure 4
 ![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/3.png)
 ## - The Berkeley Algorithm calculates the average time between all clocks and adjusts the times of each computer automatically.
-## Figure 5
-![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/4.png)
 
 ## 3. **Dynamic Interface**:
 ## - The time adjustments are displayed on each computer for a few seconds after synchronization.
-## Figure 6
-![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/5.png)
+## Figure 5
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/4.png)
 
 ## How to Run the Project Locally
 
