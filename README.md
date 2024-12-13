@@ -59,7 +59,7 @@ npm install
 npm run dev
 ```
 
-4. If the installation was successful after running the `npm run dev` command the following screen will appear, Figure 7. After that, SincPoint will run at the following address: [http://localhost:5173](http://localhost:5173). Otherwise, pay attention to the log and correct what is necessary.
+4. If the installation was successful after running the `npm run dev` command the following screen will appear, Figure 6. After that, SincPoint will run at the following address: [http://localhost:5173](http://localhost:5173). Otherwise, pay attention to the log and correct what is necessary.
 ## Figure 6
 ![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/7.png)
 
