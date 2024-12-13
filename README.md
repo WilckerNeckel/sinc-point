@@ -10,7 +10,7 @@
 - Possibility to delete a computer.
 - Synchronize times using the **Berkeley Algorithm**, adjusting for time differences between computers.
 - Interactive and responsive interface for a user-friendly experience on any device.
-- CC BY 4.0.
+- Licensed by CC BY 4.0.
 
 ## Technologies Used
 
