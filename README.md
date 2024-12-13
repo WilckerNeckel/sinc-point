@@ -19,26 +19,27 @@
 - **Day.js**: Date and time manipulation.
 - **Vite**: Fast and efficient build tool.
 
-## How it Works
+# How it Works
 
-## 1. **Add Computers**:
-- Enter an IP and a custom time for each computer.
+# 1. **Add Computers**:
+## - Enter an IP and a custom time for each computer.
 ## Figure 2
 ![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/2-0.png)
-- Each computer is displayed as a card in the interface.
+## - Each computer is displayed as a card in the interface.
 ## Figure 3
 ![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/2.png)
 ## 2. **Synchronize Times**:
-- Click the **Synchronize** button.
+## - Click the **Synchronize** button.
 ## Figure 4
 ![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/3.png)
-- The Berkeley Algorithm calculates the average time between all clocks and adjusts the times of each computer automatically.
+## - The Berkeley Algorithm calculates the average time between all clocks and adjusts the times of each computer automatically.
 ## Figure 5
 ![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/4.png)
 
 ## 3. **Dynamic Interface**:
-- The time adjustments are displayed on each computer for a few seconds after synchronization.
+## - The time adjustments are displayed on each computer for a few seconds after synchronization.
 ![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/5.png)
+
 ## How to Run the Project Locally
 
 1. Clone the repository:
