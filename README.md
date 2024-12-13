@@ -51,7 +51,7 @@ git clone <REPOSITORY_URL>
 2. Install the dependencies:
 
 ```bash
-npm install
+npm install or apt install npm
 ```
 
 3. Start the development server:
