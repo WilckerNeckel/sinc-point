@@ -1,80 +1,75 @@
-# SincPoint
+SincPoint is a logical clock simulator that uses the Berkeley Algorithm for clock synchronization. With this application, you can add computers with different times and automatically synchronize them so that they are all aligned based on an average time calculation.
 
-SincPoint é um simulador de relógios lógicos que utiliza o Algoritmo de Berkeley para sincronização de relógios. Com essa aplicação, você pode adicionar computadores com horários distintos e sincronizá-los automaticamente para que fiquem todos alinhados com base em um cálculo de tempo médio.
+## Features
 
-## Funcionalidades
+- Add computers with custom IPs and times.
+- Display the current time of each computer in the interface.
+- Possibility to move a computer card
+- Possibility to delete a computer
+- Synchronize times using the **Berkeley Algorithm**, adjusting for time differences between computers.
+- Interactive and responsive interface for a user-friendly experience on any device.
 
-- Adicionar computadores com IPs e horários personalizados.
-- Exibir o horário atual de cada computador na interface.
-- Possibilidade de mover card do computador
-- Possibilidade de deletar algum computador
-- Sincronizar os horários utilizando o **Algoritmo de Berkeley**, ajustando as diferenças de tempo entre os computadores.
-- Interface interativa e responsiva para uma experiência amigável em qualquer dispositivo.
+## Technologies Used
 
-## Tecnologias Utilizadas
+- **React**: Main library for building the interface.
+- **Material-UI**: Component styling and responsive layout.
+- **Day.js**: Date and time manipulation.
+- **Vite**: Fast and efficient build tool.
 
-- **React**: Biblioteca principal para construção da interface.
-- **Material-UI**: Estilização de componentes e layout responsivo.
-- **Day.js**: Manipulação de datas e horas.
-- **Vite**: Ferramenta de build rápida e eficiente.
+## How it Works
 
-## Como Funciona
+1. **Add Computers**:
+- Enter an IP and a custom time for each computer.
+- Each computer is displayed as a card in the interface.
 
-1. **Adicionar Computadores**:
-   - Insira um IP e um horário personalizado para cada computador.
-   - Cada computador é exibido como um card na interface.
+2. **Synchronize Times**:
+- Click the **Synchronize** button.
+- The Berkeley Algorithm calculates the average time between all clocks and adjusts the times of each computer automatically.
 
-2. **Sincronizar Horários**:
-   - Clique no botão **Sincronizar**.
-   - O Algoritmo de Berkeley calcula o tempo médio entre todos os relógios e ajusta os horários de cada computador automaticamente.
+3. **Dynamic Interface**:
+- The time adjustments are displayed on each computer for a few seconds after synchronization.
 
-3. **Interface Dinâmica**:
-   - Os ajustes de tempo são exibidos em cada computador por alguns segundos após a sincronização.
+## How to Run the Project Locally
 
-## Como Rodar o Projeto Localmente
+1. Clone the repository:
 
-1. Clone o repositório:
+```bash
+git clone <REPOSITORY_URL>
+```
 
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
-   ```
+2. Install the dependencies:
 
-2. Instale as dependências:
+```bash
+npm install
+```
 
-   ```bash
-   npm install
-   ```
+3. Start the development server:
 
-3. Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
 
-   ```bash
-   npm run dev
-   ```
+4. Access the application in the browser at: [http://localhost:5173](http://localhost:5173)
 
-4. Acesse a aplicação no navegador em: [http://localhost:5173](http://localhost:5173)
+## Link to Deploy
 
-## Link para Deploy
+You can access the hosted application through the link below:
 
-Você pode acessar a aplicação hospedada pelo link abaixo:
+[**SincPoint - Logical Clock Simulator**](https://sincpoint.nexsyn.com.br)
 
-[**SincPoint - Simulador de Relógios Lógicos**](https://sincpoint.nexsyn.com.br)
-
-## Estrutura do Projeto
+## Project Structure
 
 - **/src**
-  - **components**: Componentes reutilizáveis como ComputerCard, ServerClock, e ComputerGrid.
-  - **contexts**: Contextos globais como notificações.
-  - **assets**: Imagens e ícones utilizados na aplicação.
-  - **App.jsx**: Ponto principal da aplicação.
+- **components**: Reusable components such as ComputerCard, ServerClock, and ComputerGrid.
+- **contexts**: Global contexts such as notifications. - **assets**: Images and icons used in the application.
+- **App.jsx**: Main point of the application.
 
-## Algoritmo de Berkeley
+## Berkeley Algorithm
 
-O Algoritmo de Berkeley é utilizado para sincronização de relógios em sistemas distribuídos. O servidor central calcula o tempo médio com base nos tempos enviados pelos clientes e ajusta os relógios de forma proporcional.
+The Berkeley Algorithm is used for clock synchronization in distributed systems. The central server calculates the average time based on the times sent by the clients and adjusts the clocks proportionally.
 
-Na aplicação, a implementação funciona da seguinte forma:
+In the application, the implementation works as follows:
 
-1. Os tempos de cada computador são enviados ao servidor.
-2. O servidor calcula a diferença entre os relógios e o tempo médio.
-3. Cada computador recebe um ajuste proporcional para sincronização.
-
-
+1. The times of each computer are sent to the server.
+2. The server calculates the clocks' and average time difference.
+3. Each computer receives a proportional adjustment for synchronization.
