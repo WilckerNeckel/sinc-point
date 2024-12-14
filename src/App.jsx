@@ -86,22 +86,22 @@ function App() {
   }
 
   const handleSync = () => {
-     // Captura o tempo de início imediato
+    // Captura o tempo de início imediato
     setSync(true);
     setResetTime(false);
 
     // Temporizador para desativar o efeito de sincronização
     setTimeout(() => {
-      const startExecution = performance.now(); 
-      console.log("start execution ", startExecution)
+      const startExecution = performance.now();
+      console.log("start execution ", startExecution);
       setSync(false);
       setComputers((prev) => applyBerkeleyAlgorithm(prev));
       setResetTime(true);
-      const endExecution = performance.now(); 
-      console.log("end execution ", endExecution)
-      const elapsedExecution = (endExecution - startExecution) / 1000; 
-      
-      console.log("elapsed variable", elapsedExecution)
+      const endExecution = performance.now();
+      console.log("end execution ", endExecution);
+      const elapsedExecution = (endExecution - startExecution) / 1000;
+
+      console.log("elapsed variable", elapsedExecution);
       showNotification({
         title: "Synchronized clocks",
         message: `Time: ${elapsedExecution} seconds.`,
@@ -162,7 +162,7 @@ function App() {
       {
         id: computers.length + 1,
         ip: newComputer.ip,
-        time: dateTime.format("DD/MM/YYYY HH:mm:ss"), 
+        time: dateTime.format("DD/MM/YYYY HH:mm:ss"),
 
         timeAdjustment: 0,
       },
@@ -172,22 +172,21 @@ function App() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div className="title-container">
+        <Typography
+          variant="h3"
+          sx={{
+            color: "#81c784",
+            fontFamily: "'Pacifico', cursive",
+            textAlign: "center",
+            marginBottom: "40px",
+            textShadow: "1px 16px 12px rgba(0, 0, 0, 0.8)",
+          }}
+        >
+          SincPoint
+        </Typography>
+      </div>
       <div className="app-container">
-        <div className="title-container">
-          <Typography
-            variant="h3"
-            sx={{
-              color: "#81c784",
-              fontFamily: "'Pacifico', cursive", 
-              textAlign: "center",
-              marginBottom: "40px", 
-              textShadow: "1px 16px 12px rgba(0, 0, 0, 0.8)",
-            }}
-          >
-            SincPoint
-          </Typography>
-        </div>
-
         <div className="center-content">
           <div className={`server-image-container ${sync ? "syncing" : ""}`}>
             <ServerClock
