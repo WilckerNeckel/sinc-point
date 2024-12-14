@@ -1,80 +1,87 @@
-# SincPoint
+# SincPoint is a logical clock simulator that uses the Berkeley Algorithm for clock synchronization. With this application, you can add computers with different times and automatically synchronize them to align them based on an average time calculation.
+## Figure 1
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/1.png)
 
-SincPoint é um simulador de relógios lógicos que utiliza o Algoritmo de Berkeley para sincronização de relógios. Com essa aplicação, você pode adicionar computadores com horários distintos e sincronizá-los automaticamente para que fiquem todos alinhados com base em um cálculo de tempo médio.
+## Features
 
-## Funcionalidades
+- Add computers with custom IPs and times.
+- Display the current time of each computer in the interface.
+- Possibility to move a computer card.
+- Possibility to delete a computer.
+- Synchronize times using the **Berkeley Algorithm**, adjusting for time differences between computers.
+- Interactive and responsive interface for a user-friendly experience on any device.
+- Licensed by `CC BY 4.0`.
 
-- Adicionar computadores com IPs e horários personalizados.
-- Exibir o horário atual de cada computador na interface.
-- Possibilidade de mover card do computador
-- Possibilidade de deletar algum computador
-- Sincronizar os horários utilizando o **Algoritmo de Berkeley**, ajustando as diferenças de tempo entre os computadores.
-- Interface interativa e responsiva para uma experiência amigável em qualquer dispositivo.
+## Technologies Used
 
-## Tecnologias Utilizadas
+- **React**: Main library for building the interface.
+- **Material-UI**: Component styling and responsive layout.
+- **Day.js**: Date and time manipulation.
+- **Vite**: Fast and efficient build tool.
 
-- **React**: Biblioteca principal para construção da interface.
-- **Material-UI**: Estilização de componentes e layout responsivo.
-- **Day.js**: Manipulação de datas e horas.
-- **Vite**: Ferramenta de build rápida e eficiente.
+# How it Works
 
-## Como Funciona
+# 1. **Add Computers**:
+## - Enter an IP and a custom time for each computer.
+## Figure 2
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/2-0.png)
+## - Each computer is displayed as a card in the interface.
+## Figure 3
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/2.png)
+## 2. **Synchronize Times**:
+## - Click the **Synchronize** button.
+## Figure 4
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/3.png)
+## - The Berkeley Algorithm calculates the average time between all clocks and adjusts the times of each computer automatically.
 
-1. **Adicionar Computadores**:
-   - Insira um IP e um horário personalizado para cada computador.
-   - Cada computador é exibido como um card na interface.
+## 3. **Dynamic Interface**:
+## - The time adjustments are displayed on each computer for a few seconds after synchronization.
+## Figure 5
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/4.png)
 
-2. **Sincronizar Horários**:
-   - Clique no botão **Sincronizar**.
-   - O Algoritmo de Berkeley calcula o tempo médio entre todos os relógios e ajusta os horários de cada computador automaticamente.
+## How to Run the Project Locally
 
-3. **Interface Dinâmica**:
-   - Os ajustes de tempo são exibidos em cada computador por alguns segundos após a sincronização.
+1. Clone the repository:
 
-## Como Rodar o Projeto Localmente
+```bash
+git clone <REPOSITORY_URL>
+```
 
-1. Clone o repositório:
+2. Install the dependencies:
 
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
-   ```
+```bash
+npm install
+```
 
-2. Instale as dependências:
+3. Start the development server:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm run dev
+```
 
-3. Inicie o servidor de desenvolvimento:
+4. If the installation was successful after running the `npm run dev` command the following screen will appear, Figure 6. After that, SincPoint will run at the following address: [http://localhost:5173](http://localhost:5173). Otherwise, pay attention to the log and correct what is necessary.
+## Figure 6
+![animation](https://github.com/WilckerNeckel/sinc-point/blob/main/Images/7.png)
 
-   ```bash
-   npm run dev
-   ```
+## Link to Deploy
 
-4. Acesse a aplicação no navegador em: [http://localhost:5173](http://localhost:5173)
+You can access the hosted application through the link below:
 
-## Link para Deploy
+[**SincPoint - Logical Clock Simulator**](https://sincpoint.nexsyn.com.br)
 
-Você pode acessar a aplicação hospedada pelo link abaixo:
-
-[**SincPoint - Simulador de Relógios Lógicos**](https://sincpoint.nexsyn.com.br)
-
-## Estrutura do Projeto
+## Project Structure
 
 - **/src**
-  - **components**: Componentes reutilizáveis como ComputerCard, ServerClock, e ComputerGrid.
-  - **contexts**: Contextos globais como notificações.
-  - **assets**: Imagens e ícones utilizados na aplicação.
-  - **App.jsx**: Ponto principal da aplicação.
+- **components**: Reusable components such as ComputerCard, ServerClock, and ComputerGrid.
+- **contexts**: Global contexts such as notifications. - **assets**: Images and icons used in the application.
+- **App.jsx**: Main point of the application.
 
-## Algoritmo de Berkeley
+## Berkeley Algorithm
 
-O Algoritmo de Berkeley é utilizado para sincronização de relógios em sistemas distribuídos. O servidor central calcula o tempo médio com base nos tempos enviados pelos clientes e ajusta os relógios de forma proporcional.
+The Berkeley Algorithm is used for clock synchronization in distributed systems. The central server calculates the average time based on the times sent by the clients and adjusts the clocks proportionally.
 
-Na aplicação, a implementação funciona da seguinte forma:
+In the application, the implementation works as follows:
 
-1. Os tempos de cada computador são enviados ao servidor.
-2. O servidor calcula a diferença entre os relógios e o tempo médio.
-3. Cada computador recebe um ajuste proporcional para sincronização.
-
-
+1. The times of each computer are sent to the server.
+2. The server calculates the clocks' and average time difference.
+3. Each computer receives a proportional adjustment for synchronization.
