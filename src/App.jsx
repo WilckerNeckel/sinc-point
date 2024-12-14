@@ -103,8 +103,8 @@ function App() {
       
       console.log("elapsed variable", elapsedExecution)
       showNotification({
-        title: "Relógios sincronizados",
-        message: `Tempo: ${elapsedExecution} segundos.`,
+        title: "Synchronized clocks",
+        message: `Time: ${elapsedExecution} seconds.`,
         type: "success",
       });
     }, 7400);
@@ -128,16 +128,16 @@ function App() {
   const handleAddComputer = () => {
     if (!newComputer.ip || !newComputer.date || !newComputer.time) {
       showNotification({
-        title: "Erro ao adicionar computador",
-        message: "Preencha todos os campos",
+        title: "Error adding computer",
+        message: "Fill in all fields",
         type: "error",
       });
       return;
     }
     if (computers.find((computer) => computer.ip === newComputer.ip)) {
       showNotification({
-        title: "Erro ao adicionar computador",
-        message: "IP já cadastrado",
+        title: "Error adding computer",
+        message: "IP already registered",
         type: "error",
       });
       return;
@@ -145,8 +145,8 @@ function App() {
 
     if (!isValidIP(newComputer.ip)) {
       showNotification({
-        title: "Erro ao adicionar computador",
-        message: "IP inválido",
+        title: "Error adding computer",
+        message: "Invalid IP",
         type: "error",
       });
       return;
@@ -203,7 +203,7 @@ function App() {
               marginBottom: "20px",
             }}
           >
-            Sincronizar
+            Synchronize
           </button>
           {computers.length > 0 && (
             <ComputerGrid
@@ -240,7 +240,7 @@ function App() {
             variant="h6"
             sx={{ marginBottom: "16px", color: "#81c784" }}
           >
-            Adicionar Computador
+            Add computer
           </Typography>
           <TextField
             label="IP"
@@ -273,7 +273,7 @@ function App() {
             }}
           />
           <TextField
-            label="Data"
+            label="Date"
             type="date"
             value={newComputer.date.format("YYYY-MM-DD")}
             onChange={(e) =>
@@ -316,7 +316,7 @@ function App() {
             }}
           >
             <TextField
-              label="Hora"
+              label="Hour"
               type="number"
               InputProps={{ inputProps: { min: 0, max: 23 } }}
               value={newComputer.time.hour()}
@@ -349,7 +349,7 @@ function App() {
               }}
             />
             <TextField
-              label="Minuto"
+              label="Minute"
               type="number"
               InputProps={{ inputProps: { min: 0, max: 59 } }}
               value={newComputer.time.minute()}
@@ -382,7 +382,7 @@ function App() {
               }}
             />
             <TextField
-              label="Segundo"
+              label="Second"
               type="number"
               InputProps={{ inputProps: { min: 0, max: 59 } }}
               value={newComputer.time.second()}
@@ -428,7 +428,7 @@ function App() {
               },
             }}
           >
-            Adicionar
+            Add
           </Button>
         </Drawer>
       </div>

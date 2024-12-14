@@ -51,7 +51,7 @@ function ServerClock({ ip, time, timeAdjustment }) {
         variant="h6"
         style={{ color: "#81c784", marginTop: "8px", fontWeight: "bold" }}
       >
-        Servidor Central
+        Central Server
       </Typography>
       <Typography
         variant="h6"
@@ -63,7 +63,7 @@ function ServerClock({ ip, time, timeAdjustment }) {
           borderRadius: "4px",
         }}
       >
-        {ip || "IP não disponível"}
+        {ip || "IP not available"}
       </Typography>
       <Typography variant="" style={{ color: "#ffffff", marginTop: "4px" }}>
         {time}

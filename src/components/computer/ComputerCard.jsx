@@ -102,7 +102,7 @@ function ComputerCard({ ip, time, timeAdjustment, onDeleteCard, sync }) {
               borderRadius: "4px",
             }}
           >
-            {ip || "IP não disponível"}
+            {ip || "IP not available"}
           </Typography>
           <Typography
             variant="body2"
