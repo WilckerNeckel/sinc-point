@@ -172,7 +172,7 @@ function App() {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="title-container">
+      <div className="title-app-container">
         <Typography
           variant="h3"
           sx={{
@@ -185,7 +185,6 @@ function App() {
         >
           SincPoint
         </Typography>
-      </div>
       <div className="app-container">
         <div className="center-content">
           <div className={`server-image-container ${sync ? "syncing" : ""}`}>
@@ -215,7 +214,11 @@ function App() {
           )}
         </div>
 
-        <div
+      </div>
+        
+      </div>
+
+      <div
           className="drawer-indicator"
           onMouseEnter={() => setDrawerOpen(true)}
         >
@@ -430,7 +433,6 @@ function App() {
             Add
           </Button>
         </Drawer>
-      </div>
     </LocalizationProvider>
   );
 }
